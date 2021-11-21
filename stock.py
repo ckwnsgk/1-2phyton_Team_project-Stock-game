@@ -1,7 +1,6 @@
 from tkinter import *
 import random
 from tkinter import font
-import matplotlib.pyplot as plt
 import time
 import math
 import threading
@@ -47,6 +46,8 @@ def cal(coins1, coins2):
     coins = round(coins)
     return coins
 
+###################스레드#############################
+
 def upd():
     global a, b, c, d, e, f, own_money, b_count, e_count, r_count, q_count, s_count, d_count
     a = cal(Bitcoin, Bitcoin)
@@ -66,6 +67,8 @@ def upd():
     label9.config(text="    {}           {}             {}        {}         {}        {}".format(b_count, e_count, r_count, q_count, s_count, d_count))
 
     threading.Timer(1, upd).start()
+
+#########################매도 매수######################
 
 def b1events():
     global b_count, own_money
@@ -199,8 +202,152 @@ def b11eventd():
         d_count = d_count - 1
         own_money = own_money + f
 
+###############################풀매수 풀매도#################################
+
+def b1eventp():
+    global b_count, own_money
+    if (own_money - a > 0):
+        button13['text'] = "풀매수"
+        button13['fg'] = 'black'
+        while own_money  - a> 0:
+            own_money = own_money - a
+            b_count = b_count + 1
+    else :
+        button13['text'] = "불가"
+        button13['fg'] = 'red'
+
+def b1eventpp():
+    global b_count, own_money
+    if (b_count <= 0):
+        button14['text'] = "불가"
+        button14['fg'] = 'red'
+    else :
+        button14['text'] = "풀매도"
+        button14['fg'] = 'black'
+        while b_count > 0:
+            own_money = own_money + a
+            b_count = b_count - 1
 
 
+def b3eventp():
+    global e_count, own_money
+    if (own_money - b > 0):
+        button15['text'] = "풀매수"
+        button15['fg'] = 'black'
+        while own_money - b > 0:
+            own_money = own_money - b
+            e_count = e_count + 1
+    else :
+        button15['text'] = "불가"
+        button15['fg'] = 'red'
+
+def b3eventpp():
+    global e_count, own_money
+    if (e_count <= 0):
+        button16['text'] = "불가"
+        button16['fg'] = 'red'
+    else :
+        button16['text'] = "풀매도"
+        button16['fg'] = 'black'
+        while e_count > 0:
+            own_money = own_money + a
+            e_count = e_count - 1
+
+def b5eventp():
+    global r_count, own_money
+    if (own_money - c > 0):
+        button17['text'] = "풀매수"
+        button17['fg'] = 'black'
+        while own_money - c > 0:
+            own_money = own_money - c
+            r_count = r_count + 1
+    else :
+        button17['text'] = "불가"
+        button17['fg'] = 'red'
+
+def b5eventpp():
+    global r_count, own_money
+    if (r_count <= 0):
+        button18['text'] = "불가"
+        button18['fg'] = 'red'
+    else :
+        button18['text'] = "풀매도"
+        button18['fg'] = 'black'
+        while r_count > 0:
+            own_money = own_money + c
+            r_count = r_count - 1
+
+def b7eventp():
+    global q_count, own_money
+    if (own_money - d > 0):
+        button19['text'] = "풀매수"
+        button19['fg'] = 'black'
+        while own_money - d > 0:
+            own_money = own_money - d
+            q_count = q_count + 1
+    else :
+        button19['text'] = "불가"
+        button19['fg'] = 'red'
+
+def b7eventpp():
+    global q_count, own_money
+    if (q_count <= 0):
+        button20['text'] = "불가"
+        button20['fg'] = 'red'
+    else :
+        button20['text'] = "풀매도"
+        button20['fg'] = 'black'
+        while q_count > 0:
+            own_money = own_money + d
+            q_count = q_count - 1
+
+def b9eventp():
+    global s_count, own_money
+    if (own_money - e > 0):
+        button21['text'] = "풀매수"
+        button21['fg'] = 'black'
+        while own_money - e > 0:
+            own_money = own_money - e
+            s_count = s_count + 1
+    else :
+        button21['text'] = "불가"
+        button21['fg'] = 'red'
+
+def b9eventpp():
+    global s_count, own_money
+    if (s_count <= 0):
+        button22['text'] = "불가"
+        button22['fg'] = 'red'
+    else :
+        button22['text'] = "풀매도"
+        button22['fg'] = 'black'
+        while s_count > 0:
+            own_money = own_money + e
+            s_count = s_count - 1
+
+def b11eventp():
+    global d_count, own_money
+    if (own_money - f > 0):
+        button23['text'] = "풀매수"
+        button23['fg'] = 'black'
+        while own_money - f> 0:
+            own_money = own_money - f
+            d_count = d_count + 1
+    else :
+        button23['text'] = "불가"
+        button23['fg'] = 'red'
+
+def b11eventpp():
+    global d_count, own_money
+    if (d_count <= 0):
+        button24['text'] = "불가"
+        button24['fg'] = 'red'
+    else :
+        button24['text'] = "풀매도"
+        button24['fg'] = 'black'
+        while d_count > 0:
+            own_money = own_money + f
+            d_count = d_count - 1
 
 root = Tk()
 root.title("Stoct Game")
@@ -236,10 +383,10 @@ label4 = Label(root, text= "{}".format(Qtum), font = (30))
 label4.place(x=62, y=270)
 
 label = Label(root, text= "Stellar", font = (30))
-label.place(x=470, y=250)
+label.place(x=474, y=250)
 
 label5 = Label(root, text= "{}".format(Stellar), font = (30))   
-label5.place(x=470, y=270)
+label5.place(x=474, y=270)
 
 label = Label(root, text= "Dodge", font = (30))
 label.place(x=800, y=250)
@@ -248,7 +395,7 @@ label6 = Label(root, text= "{}".format(Dodge), font = (30))
 label6.place(x=800, y=270)
 
 label = Label(root, text = "잔고", font = (30))
-label.place(x = 710, y = 370)
+label.place(x = 695, y = 370)
 
 label7 = Label(root, text = "{}".format(own_money), font = (30))
 label7.place(x = 685, y = 400)
@@ -302,6 +449,43 @@ button11.place(x= 770, y=290)
 
 button12 = Button(root, command= b11eventd, text="매도", font = 30)
 button12.place(x= 830, y=290)
+
+########################풀매수 풀매도##############################
+button13 = Button(root, command= b1eventp, text="풀매수", font = 30)
+button13.place(x= 30, y=115)
+
+button14 = Button(root, command= b1eventpp, text="풀매도", font = 30)
+button14.place(x= 90, y=115)
+
+button15 = Button(root, command= b3eventp, text="풀매수", font = 30)
+button15.place(x= 435, y=115)
+
+button16 = Button(root, command= b3eventpp, text="풀매도", font = 30)
+button16.place(x= 495, y=115)
+
+button17 = Button(root, command= b5eventp, text="풀매수", font = 30)
+button17.place(x= 760, y=115)
+
+button18 = Button(root, command= b5eventpp, text="풀매도", font = 30)
+button18.place(x= 820, y=115)
+
+button19 = Button(root, command= b7eventp, text="풀매수", font = 30)
+button19.place(x= 30, y=315)
+
+button20 = Button(root, command= b7eventpp, text="풀매도", font = 30)
+button20.place(x= 90, y=315)
+
+button21 = Button(root, command= b9eventp, text="풀매수", font = 30)
+button21.place(x= 435, y=315)
+
+button22 = Button(root, command= b9eventpp, text="풀매도", font = 30)
+button22.place(x= 495, y=315)
+
+button23 = Button(root, command= b11eventp, text="풀매수", font = 30)
+button23.place(x= 760, y=315)
+
+button24 = Button(root, command= b11eventpp, text="풀매도", font = 30)
+button24.place(x= 820, y=315)
     
 upd()
 
